@@ -1,3 +1,6 @@
 [submodule "dep/doctest"]
 	path = dep/doctest
 	url = https://github.com/onqtam/doctest
+[submodule "dep/mtv_env"]
+	path = dep/mtv_env
+	url = https://github.com/matovitch/mtv_env
