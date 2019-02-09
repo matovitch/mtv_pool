@@ -17,4 +17,5 @@ endif
 
 !ld = |> $(CX) %f $(LDFLAGS) -o %o |>
 
+CXFLAGS += -I ../dep/doctest
 CXFLAGS += -I .
