@@ -1,0 +1,20 @@
+TEST      = $(ROOT)/test
+
+TEST_SRC = $(TEST)/*.cpp
+TEST_OBJ = $(TEST)/*.o
+
+ifeq (@(IS_ASAN),y)
+    LDFLAGS += -fsanitize=address
+endif
+
+ifeq (@(IS_MSAN),y)
+    LDFLAGS += -fsanitize=memory
+endif
+
+ifeq (@(IS_STATIC),y)
+    LDFLAGS += -static-libstdc++ -static-libgcc
+endif
+
+!ld = |> $(CX) %f $(LDFLAGS) -o %o |>
+
+CXFLAGS += -I .

@@ -1,0 +1,5 @@
+*.o
+.tup
+build/*
+!build/tup.config
+

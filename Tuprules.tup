@@ -1,0 +1,35 @@
+ROOT = $(TUP_CWD)
+
+CX = clang++
+
+CXFLAGS  = -std=c++17
+CXFLAGS += -Wall
+
+ifeq (@(IS_DEBUG),y)
+    CXFLAGS += -g
+endif
+
+ifeq (@(IS_O_LEVEL),0)
+    CXFLAGS += -O1
+endif
+ifeq (@(IS_O_LEVEL),1)
+    CXFLAGS += -O1
+endif
+ifeq (@(IS_O_LEVEL),2)
+    CXFLAGS += -O2
+endif
+ifeq (@(IS_O_LEVEL),3)
+    CXFLAGS += -O3
+endif
+
+ifeq (@(IS_ASAN),y)
+    CXFLAGS += -fsanitize=address
+endif
+
+ifeq (@(IS_MSAN),y)
+    CXFLAGS += -fsanitize=memory
+endif
+
+CXFLAGS += -I $(ROOT)/include
+
+!cx = |> $(CX) $(CXFLAGS) -c %f -o %o |>

@@ -1,0 +1,4 @@
+include_rules
+
+: foreach $(EXAMPLE_SRC) |> !cx |> %B.o
+: foreach $(EXAMPLE_OBJ) |> !ld |> %B $(ROOT)/<example>

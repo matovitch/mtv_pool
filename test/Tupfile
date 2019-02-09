@@ -1,0 +1,4 @@
+include_rules
+
+: foreach $(TEST_SRC)                      |> !cx |> %B.o
+: foreach $(TEST_OBJ) | $(ROOT)/<mtv_list> |> !ld |> %B $(ROOT)/<test>
