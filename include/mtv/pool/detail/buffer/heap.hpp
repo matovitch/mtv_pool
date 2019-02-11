@@ -19,12 +19,13 @@ namespace buffer
 template <class Traits>
 class THeap : public Traits::Abstract
 {
-    using Type = typename Traits::Type;
+    using TypeStorage = typename Traits::TypeStorage;
+    using Type        = typename Traits::Type;
 
 public:
 
     THeap(const std::size_t size) :
-        _memory{new Type[size]}
+        _memory{reinterpret_cast<Type*>(new TypeStorage[size])}
     {
         _head = _memory;
         _tail = _memory + size;
@@ -73,8 +74,10 @@ namespace heap
 template <class HeapType>
 struct TTraits
 {
-    using Type     = HeapType;
-    using Abstract = TAbstract<Type>;
+    using Type        = HeapType;
+    using Abstract    = TAbstract<Type>;
+    using TypeStorage = std::aligned_storage_t<sizeof  (Type),
+                                               alignof (Type)>;
 };
 
 template <class Type>
